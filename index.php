@@ -41,21 +41,7 @@
                 </li>
                 <li>
                     <label>Date</label>
-                    <script>
-                        var d = new Date();
-                        var dd = d.getDate();
-                        var mm = d.getMonth()+1;
-                        var yyyy = d.getFullYear();
-
-                        if(dd<10)
-	                        dd = '0'+dd;
-                        if(mm<10)
-	                        mm = '0'+mm;
-
-                        var date = dd + '/' + mm + '/' + yyyy;
-
-                        document.write("<input class='input' type='date' name='date' placeholder='Date' value="+date+">");
-                    </script>
+                    <input class='input' type='date' name='date' placeholder='Date'>
                 </li>
                 <li>
                     <label>Place of supply</label>
