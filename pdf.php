@@ -73,16 +73,17 @@ function getIndianCurrency(float $number)
     $pdf->AddPage();
 
     $pdf->SetFont("Arial","B",13);
-
+    if($type=="Invoice")
+        $pdf->Cell(0,2.5,"",0,1,'');
     $pdf->Cell(0, 10,"DIPESHWARI AGRICULTURE",1,1,'C');
     $pdf->SetFont("Arial","",10);
-    $pdf->Cell(0,3,"",0,1,'');
+    $pdf->Cell(0,5,"",0,1,'');
     $pdf->Cell(0,5,"Plot No.21, National Highway, Bajrang Choraha, At Swaroopganj,",'0','1','C');
     $pdf->Cell(0,5,"Tehsil - Pindwada, Sirohi, Rajasthan, 307023.",0,1,'C');
     $pdf->SetFont("Arial","B",9);
     $pdf->Cell(0,5,"Mobile No.: 8140310780      Email ID:  dipeshwariagriculture@gmail.com",0,1,'C');
     $pdf->Cell(0,5,"GSTIN No.:  08CELPP8515E1Z7",0,1,'C');
-    $pdf->Cell(0,3,"",0,1,'');
+    $pdf->Cell(0,4,"",0,1,'');
 
     $pdf->SetFont("Arial","",7);
     if($type == "Invoice")
@@ -117,8 +118,8 @@ function getIndianCurrency(float $number)
 
     $pdf->SetFont("Arial","B",9);
     $pdf->Cell(8,9,"SrNo","LBR",0,'C');
-    $pdf->Cell(81,9,"Product Name","BR",0,'C');
-    $pdf->Cell(11,9,"HSN","BR",0,'C');
+    $pdf->Cell(75,9,"Product Name","BR",0,'C');
+    $pdf->Cell(17,9,"HSN","BR",0,'C');
     $pdf->Cell(17,9,"Qty","BR",0,'C');
     $pdf->Cell(23,9,"Rate","BR",0,'C');
     if($type == "Invoice"){
@@ -134,10 +135,10 @@ function getIndianCurrency(float $number)
     $pdf->SetFont("Arial","",9);
     
         $pdf->Cell(8,9,1,"LR",0,'C');
-        $pdf->Cell(81,9,$p1,"R",0,'C');
-        $pdf->Cell(11,9,$hsn,"R",0,'C');
-        $pdf->Cell(17,9,$qty,"R",0,'R');
-        $pdf->Cell(23,9,number_format($rate,2,'.',''),"R",0,'R');
+        $pdf->Cell(75,9,$p1,"R",0,'C');
+        $pdf->Cell(17,9,$hsn,"R",0,'C');
+        $pdf->Cell(17,9,$qty,"R",0,'C');
+        $pdf->Cell(23,9,number_format($rate,2,'.',''),"R",0,'C');
         if($type == "Invoice"){
             $pdf->Cell(11,9,number_format($igst+$sgst+$cgst,2,'.',''),"R",0,'R');
         }else{
@@ -147,8 +148,8 @@ function getIndianCurrency(float $number)
         $pdf->Cell(39,9,number_format($qty*$rate,2,'.',''),"R",1,'R');
 
         $pdf->Cell(8,9,"","LR",0,'C');
-        $pdf->Cell(81,9,$p2,"R",0,'C');
-        $pdf->Cell(11,9,"","R",0,'C');
+        $pdf->Cell(75,9,$p2,"R",0,'C');
+        $pdf->Cell(17,9,"","R",0,'C');
         $pdf->Cell(17,9,"","R",0,'R');
         $pdf->Cell(23,9,"","R",0,'R');
         if($type == "Invoice"){
@@ -159,8 +160,8 @@ function getIndianCurrency(float $number)
         }
 
         $pdf->Cell(8,9,"","LR",0,'C');
-        $pdf->Cell(81,9,$p3,"R",0,'C');
-        $pdf->Cell(11,9,"","R",0,'C');
+        $pdf->Cell(75,9,$p3,"R",0,'C');
+        $pdf->Cell(17,9,"","R",0,'C');
         $pdf->Cell(17,9,"","R",0,'R');
         $pdf->Cell(23,9,"","R",0,'R');
         if($type == "Invoice"){
@@ -171,8 +172,8 @@ function getIndianCurrency(float $number)
         }
 
         $pdf->Cell(8,9,"","LR",0,'C');
-        $pdf->Cell(81,9,$p4,"R",0,'C');
-        $pdf->Cell(11,9,"","R",0,'C');
+        $pdf->Cell(75,9,$p4,"R",0,'C');
+        $pdf->Cell(17,9,"","R",0,'C');
         $pdf->Cell(17,9,"","R",0,'R');
         $pdf->Cell(23,9,"","R",0,'R');
         if($type == "Invoice"){
@@ -181,10 +182,10 @@ function getIndianCurrency(float $number)
         }else{
             $pdf->Cell(50,9,"","R",1,'R');
         }
-
+        
         $pdf->Cell(8,9,"","LR",0,'C');
-        $pdf->Cell(81,9,"","R",0,'C');
-        $pdf->Cell(11,9,"","R",0,'C');
+        $pdf->Cell(75,9,"","R",0,'C');
+        $pdf->Cell(17,9,"","R",0,'C');
         $pdf->Cell(17,9,"","R",0,'R');
         $pdf->Cell(23,9,"","R",0,'R');
         if($type == "Invoice"){
@@ -195,13 +196,13 @@ function getIndianCurrency(float $number)
         }
 
         if($type != "Invoice"){
-            for($i = 0 ; $i<9 ; $i+=1){
-                $pdf->Cell(8,7,"","LR",0,'C');
-                $pdf->Cell(81,7,"","R",0,'C');
-                $pdf->Cell(11,7,"","R",0,'C');
-                $pdf->Cell(17,7,"","R",0,'R');
-                $pdf->Cell(23,7,"","R",0,'R');
-                $pdf->Cell(50,7,"","R",1,'R');
+            for($i = 0 ; $i<11 ; $i+=1){
+                $pdf->Cell(8,6,"","LR",0,'C');
+                $pdf->Cell(75,6,"","R",0,'C');
+                $pdf->Cell(17,6,"","R",0,'C');
+                $pdf->Cell(17,6,"","R",0,'R');
+                $pdf->Cell(23,6,"","R",0,'R');
+                $pdf->Cell(50,6,"","R",1,'R');
             }
             $pdf->Cell(20,9,"Bill Amount:",1,0,'L');
             $pdf->Cell(120,9,getIndianCurrency($qty*$rate),"TBR",0,'L');
@@ -221,6 +222,20 @@ function getIndianCurrency(float $number)
     
 
     if($type == "Invoice"){
+        for($i=0;$i<2;$i+=1){
+            $pdf->Cell(8,9,"","LR",0,'C');
+            $pdf->Cell(75,9,"","R",0,'C');
+            $pdf->Cell(17,9,"","R",0,'C');
+            $pdf->Cell(17,9,"","R",0,'R');
+            $pdf->Cell(23,9,"","R",0,'R');
+            if($type == "Invoice"){
+                $pdf->Cell(11,9,"","R",0,'R');
+                $pdf->Cell(39,9,"","R",1,'R');
+            }else{
+                $pdf->Cell(50,9,"","R",1,'R');
+            }
+        }
+        
         $pdf->SetFont("Arial","B",9);
         $pdf->Cell(117,9,"",'LTR',0,'L');
         $pdf->Cell(190-117-39,9,"Sub Total:","TB",0,'L');
