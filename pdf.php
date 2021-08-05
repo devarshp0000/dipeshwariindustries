@@ -1,5 +1,8 @@
 <?php
-
+// added comment
+function doNothing(){
+    echo "do nothing";
+}
 function getIndianCurrency(float $number)
 {
     if($number == 0){
